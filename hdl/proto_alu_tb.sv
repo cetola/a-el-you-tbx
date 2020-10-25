@@ -41,17 +41,19 @@ end
 always @(posedge clk) begin
     if (!reset) begin
         getData(operandA, operandB, opcode, ready);
+        
+        if (ready == 0) begin
+           doFinish;
+           $finish();
+        end
+        
+        @(posedge clk);
         request = 1;
         
         while(!valid) @(posedge clk);
         
         request = 0;
         putData(result);
-        
-        if (ready == 0) begin
-           doFinish;
-           $finish();
-        end
     end
 end
 
