@@ -27,7 +27,7 @@ begin
 end
 
 
-import "DPI-C" task doReset();
+import "DPI-C" context task doReset();
 import "DPI-C" task getData(output bit [31:0] operandA, output bit [31:0] operandB, output bit [1:0] opcode, output bit [31:0] ready);
 import "DPI-C" task putData(input bit [31:0] result);
 import "DPI-C" task doFinish();
@@ -37,6 +37,12 @@ initial begin
     while(reset) @(posedge clk);
     doReset;
 end
+
+export "DPI-C" function sayHello;
+
+function void sayHello();
+    $display("---hello export world---");
+endfunction
 
 always @(posedge clk) begin
     if (!reset) begin

@@ -1,7 +1,7 @@
 #include "tbxbindings.h"
 #include "svdpi.h"
 #include "stdio.h"
- 
+
 int a = -1;
 int b = 0;
 int operandA = 0;
@@ -15,6 +15,7 @@ bool debug = false;
 
 int doReset() {
     printf("---reset---\n");
+    sayHello();
     return 0;
 }
 
